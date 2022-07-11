@@ -1,9 +1,14 @@
 const express = require("express");
 const app = express();
 const PORT = 3000;
+let userID = 1;
 
-app.get("/", (req, res) => {
-  res.send("hi");
+app.get(`/api/users/${userID}`, (req, res) => {
+  res.send(users[userID - 1]);
+});
+
+app.get("/api/users/", (req, res) => {
+  res.send(users);
 });
 
 app.listen(PORT, () => {
