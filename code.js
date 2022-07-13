@@ -1,10 +1,17 @@
 const express = require("express");
 const app = express();
 const PORT = 3000;
-let userID = 1;
 
-app.get(`/api/users/${userID}`, (req, res) => {
-  res.send(users[userID - 1]);
+// app.get(`/api/users/:id`, (req, res) => {
+//   const user = users[req.params.id - 1];
+//   res.send(user);
+// });
+
+app.get(`/api/users/:id`, (req, res) => {
+  const person = users.filter((user, index) => {
+    return user.id === parseInt(req.params.id);
+  });
+  res.send(person[0]);
 });
 
 app.get("/api/users/", (req, res) => {
