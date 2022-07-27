@@ -74,39 +74,44 @@ const users = [
   },
 ];
 
-router.get(`/:id`, (req, res) => {
-  const person = users.filter((user) => {
-    return user.id === parseInt(req.params.id);
-  });
-  res.send(person[0]);
-});
-
 router
-  .get("/", (req, res) => {
+  .get("/", (_, res) => {
     res.send(users);
   })
   .post("/", (req, res) => {
     const user = req.body;
-    console.log(user);
-    users.push(user);
+    const lastId = users[users.length - 1].id;
+    const newId = lastId + 1;
+    const newUser = { ...user, id: newId };
+    console.log(newUser);
+    users.push(newUser);
     res.status(201).json(user);
-  })
+  });
+
+router
   .put(`/:id`, (req, res) => {
     const person = users.filter((user) => {
       return user.id === parseInt(req.params.id);
     });
-    res.send(person[0]);
     const user = req.body;
-    console.log(user);
-    users.splice(req.params.id - 1, 1, user);
+    const sameId = req.params.id;
+    const newUser = { ...user, id: sameId };
+    console.log(newUser);
+    users.splice(req.params.id - 1, 1, newUser);
+    res.send(person[0]);
+  })
+  .delete(`/:id`, (req, res) => {
+    const person = users.filter((user) => {
+      return user.id === parseInt(req.params.id);
+    });
+    users.splice(req.params.id - 1, 1);
+    res.send(person[0]);
+  })
+  .get(`/:id`, (req, res) => {
+    const person = users.filter((user) => {
+      return user.id === parseInt(req.params.id);
+    });
+    res.send(person[0]);
   });
-
-router.delete("/:id", (req, res) => {
-  const person = users.filter((user) => {
-    return user.id === parseInt(req.params.id);
-  });
-  res.send(person[0]);
-  users.splice(req.params.id - 1, 1);
-});
 
 export default router;

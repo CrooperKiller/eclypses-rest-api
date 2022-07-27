@@ -11,10 +11,10 @@ app.use(
     extended: false,
   })
 );
-app.use(bodyParser.json());
 
-app.use("/api", rootUserRoute);
+app.use(bodyParser.json());
 rootUserRoute.use("/users", userRoute);
+app.use("/api", rootUserRoute);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
