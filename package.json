@@ -4,15 +4,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@prisma/client": "^4.1.0",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "prisma": "^4.1.0"
   },
   "scripts": {
-    "start": "nodemon src index"
+    "start": "nodemon src index",
+    "print": "echo $PATH"
   },
   "repository": {
     "type": "git",

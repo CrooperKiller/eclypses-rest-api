@@ -99,6 +99,7 @@ router
     console.log(newUser);
     users.splice(req.params.id - 1, 1, newUser);
     res.send(person[0]);
+    res.status(200);
   })
   .delete(`/:id`, (req, res) => {
     const person = users.filter((user) => {
@@ -106,12 +107,14 @@ router
     });
     users.splice(req.params.id - 1, 1);
     res.send(person[0]);
+    res.status(200);
   })
   .get(`/:id`, (req, res) => {
     const person = users.filter((user) => {
       return user.id === parseInt(req.params.id);
     });
     res.send(person[0]);
+    res.status(200);
   });
 
 export default router;
