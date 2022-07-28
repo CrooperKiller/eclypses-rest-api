@@ -8,9 +8,9 @@ import userRoute from "./routes/User.js";
 //   path: __dirname,
 // });
 
-const PORT = 3000;
-
 const app = express();
+
+const PORT = 5432;
 const rootUserRoute = Router();
 
 app.use(
@@ -23,6 +23,6 @@ app.use(bodyParser.json());
 rootUserRoute.use("/users", userRoute);
 app.use("/api", rootUserRoute);
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

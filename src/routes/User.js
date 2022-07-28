@@ -11,6 +11,7 @@ const users = [
   },
   {
     id: 2,
+
     firstName: "Beck",
     lastName: "Edinboro",
     email: "bedinboro1@is.gd",
