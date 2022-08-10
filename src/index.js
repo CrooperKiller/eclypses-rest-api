@@ -10,7 +10,7 @@ import userRoute from "./routes/User.js";
 
 const app = express();
 
-const PORT = 5432;
+const PORT = 3000;
 const rootUserRoute = Router();
 
 app.use(
