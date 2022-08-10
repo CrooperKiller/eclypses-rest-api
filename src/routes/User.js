@@ -70,17 +70,6 @@ try {
       } catch (error) {
         console.error(error);
       }
-
-      // const person = users.filter((user) => {
-      //   return user.id === parseInt(req.params.id);
-      // });
-      // const user = req.body;
-      // const sameId = req.params.id;
-      // const newUser = { ...user, id: sameId };
-      // console.log(newUser);
-      // users.splice(req.params.id - 1, 1, newUser);
-      // res.send(person[0]);
-      // res.status(200);
     })
     .delete(`/:id`, (req, res) => {
       const person = users.filter((user) => {
