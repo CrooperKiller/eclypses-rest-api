@@ -10,9 +10,11 @@ try {
       try {
         const users = await prisma.user.findMany();
         res.json(users);
-        //res.statusCode(201);
+        res.status(200);
       } catch (error) {
         console.error(error);
+        res.status(500);
+        res.json({ error: "Unexpected Error" });
       }
     })
     .post("/", async (req, res) => {
@@ -32,7 +34,7 @@ try {
           res.json({
             error: "user email taken",
           });
-          res.statusCode(400);
+          res.status(400);
           throw new Error("user email taken");
         }
 
@@ -48,6 +50,8 @@ try {
         res.json(result);
       } catch (error) {
         console.error(error);
+        res.status(500);
+        res.json({ error: "Unexpected Error" });
       }
     });
 
@@ -57,7 +61,7 @@ try {
       const { email, firstName, lastName, gender, createdAt } = req.body;
       try {
         const result = await prisma.user.update({
-          where: { id: Number(id) },
+          where: { id: parseInt(id) },
           data: {
             email,
             firstName,
@@ -67,27 +71,43 @@ try {
           },
         });
         res.json(result);
+        res.status(200);
       } catch (error) {
         console.error(error);
+        res.status(500);
+        res.json({ error: "Unexpected Error" });
       }
     })
-    .delete(`/:id`, (req, res) => {
-      const person = users.filter((user) => {
-        return user.id === parseInt(req.params.id);
-      });
-      users.splice(req.params.id - 1, 1);
-      res.send(person[0]);
-      res.status(200);
+    .delete(`/:id`, async (req, res) => {
+      const { id } = req.params;
+      try {
+        const person = await prisma.user.delete({
+          where: { id: parseInt(id) },
+        });
+        res.json(person);
+        res.status(200);
+      } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ error: "Unexpected Error" });
+      }
     })
-    .get(`/:id`, (req, res) => {
-      const person = users.filter((user) => {
-        return user.id === parseInt(req.params.id);
-      });
-      res.send(person[0]);
-      res.status(200);
+    .get(`/:id`, async (req, res) => {
+      const { id } = req.params;
+      try {
+        const person = await prisma.user.findMany({
+          where: { id: parseInt(id) },
+        });
+        res.json(person);
+        res.status(200);
+      } catch (error) {
+        console.error(error);
+        res.status(500);
+        res.json({ error: "Unexpected Error" });
+      }
     });
 } catch (error) {
-  res.statusCode(500);
+  res.status(500);
   res.json({
     error,
   });
