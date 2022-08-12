@@ -10,23 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Post {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   content   String?
-//   published Boolean  @default(false)
-//   author    User     @relation(fields: [authorId], references: [id])
-//   authorId  Int
-// }
-
-// model Profile {
-//   id     Int     @id @default(autoincrement())
-//   bio    String?
-//   user   User    @relation(fields: [userId], references: [id])
-//   userId Int     @unique
-// }
-
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
@@ -34,4 +17,13 @@ model User {
   lastName  String
   gender    String
   createdAt DateTime @default(now())
+}
+
+model Movie {
+  id       Int    @id @default(autoincrement())
+  name     String
+  year     Int
+  overview String
+  IMDB     String
+  art      String
 }
